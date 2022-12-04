@@ -12,6 +12,9 @@ from sklearn.feature_extraction.text import TfidfTransformer
 
 # Import data
 
+count_vect = CountVectorizer()
+tfidf_transformer = TfidfTransformer()
+
 DATA_FILE_PATH = r'.\Suicide_Detection.csv'
 def read_data(DATA_FILE_PATH):
     print("Reading data file.")
@@ -36,16 +39,20 @@ def read_data(DATA_FILE_PATH):
 def vectorize_text(X, Y):
     print('Vectorizing Text')
 
-    count_vect = CountVectorizer()
     x_train_counts = count_vect.fit_transform(X)
 
-    tfidf_transformer = TfidfTransformer()
     x_train_tfidf = tfidf_transformer.fit_transform(x_train_counts)
 
 
     x_train, x_test, y_train, y_test = train_test_split(x_train_tfidf, Y, test_size=0.25, random_state=16)
 
     return x_train, x_test, y_train, y_test
+
+def vectorize_string(text):
+    x_counts = count_vect.transform([text])
+    x_tfidf = tfidf_transformer.transform(x_counts)
+
+    return x_tfidf
 
 def logistic_regression(x_train, y_train):
 
