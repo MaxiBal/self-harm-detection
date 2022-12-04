@@ -12,7 +12,7 @@ from sklearn.linear_model import LogisticRegression
 
 # Import data
 
-DATA_FILE_PATH = r'C:\Users\860281\Downloads\Suicide_Detection.csv'
+DATA_FILE_PATH = r'.\Suicide_Detection.csv'
 
 data = pd.read_csv(DATA_FILE_PATH)
 df = pd.DataFrame(data, columns=['text', 'class']).to_numpy()
